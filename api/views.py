@@ -5,22 +5,22 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from tasks.models import Task
-from api.serializers import TaskSerializer
+from phonebook.models import Person
+from api.serializers import PersonSerializer
 
 
 @api_view(['GET', 'POST'])
-def task_list(request):
+def person_list(request):
     """
-    List all tasks, or create a new task.
+    List all people, or create a new person
     """
     if request.method == 'GET':
-        tasks = Task.objects.all()
-        serializer = TaskSerializer(tasks, many=True)
+        people = Person.objects.all()
+        serializer = PersonSerializer(people, many=True)
         return Response(serializer.data)
 
     elif request.method == 'POST':
-        serializer = TaskSerializer(data=request.data)
+        serializer = PersonSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -30,21 +30,21 @@ def task_list(request):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
-def task_detail(request, pk):
+def person_detail(request, pk):
     """
-    Get, udpate, or delete a specific task
+    Get, udpate, or delete a specific person
     """
     try:
-        task = Task.objects.get(pk=pk)
-    except Task.DoesNotExist:
+        person = Person.objects.get(pk=pk)
+    except Person.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        serializer = TaskSerializer(task)
+        serializer = PersonSerializer(person)
         return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializer = TaskSerializer(task, data=request.data)
+        serializer = PersonSerializer(person, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -52,6 +52,6 @@ def task_detail(request, pk):
             return Response(serilizer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
-        task.delete()
-        serializer = TaskSerializer(task)
+        person.delete()
+        serializer = PersonSerializer(person)
         return Response(serializer.data)
