@@ -30,44 +30,35 @@ def person_list(request):
             return Response(
                 serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# @api_view(['GET'])
-# def person_list_paginated(request):
-#     queryset = Person.objects.all()
-#     paginator = Paginator(queryset, 20)
-
-#     page = request.query_params.get('page')
-#     try:
-#         people = paginator.page(page)
-#     except PageNotAnInteger:
-#         # If page is not an integer, deliver first page.
-#         people = paginator.page(1)
-#     except EmptyPage:
-#         # If page is out of range (e.g. 9999),
-#         # deliver last page of results.
-#         people = paginator.page(paginator.num_pages)
-
-#     serializer_context = {'request': request}
-#     serializer = PaginatedPersonSerializer(people, context=serializer_context)
-#     return Response(serializer.data)
-
 @api_view(['GET'])
-def person_list_paginated(request):
-   """
-   Returns a JSON response with a listing of course objects
-   """
-   people = Person.objects.order_by('name').all()
-   paginator = PageNumberPagination()
-   # From the docs:
-   # The paginate_queryset method is passed the initial queryset 
-   # and should return an iterable object that contains only the 
-   # data in the requested page.
-   result_page = paginator.paginate_queryset(people, request)
-   # Now we just have to serialize the data just like you suggested.
-   serializer = PersonSerializer(result_page, many=True)
-   # From the docs:
-   # The get_paginated_response method is passed the serialized page 
-   # data and should return a Response instance.
-   return paginator.get_paginated_response(serializer.data)
+def person_list_paginated(request, search, order):
+    """
+    Returns a JSON response with a listing of person objects
+    """
+    search = request.query_params.get('search', None)
+    order = request.query_params.get('order', None) 
+    print order
+    if (search==None):
+        search = '';
+
+    if (order == None or order == ''):
+        order = 'name'
+
+
+    people = Person.objects.filter(name__istartswith=search).order_by(order).all()
+
+    paginator = PageNumberPagination()    
+    # From the docs:
+    # The paginate_queryset method is passed the initial queryset 
+    # and should return an iterable object that contains only the 
+    # data in the requested page.
+    result_page = paginator.paginate_queryset(people, request)
+    # Now we just have to serialize the data
+    serializer = PersonSerializer(result_page, many=True)
+    # From the docs:
+    # The get_paginated_response method is passed the serialized page 
+    # data and should return a Response instance.
+    return paginator.get_paginated_response(serializer.data)
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
