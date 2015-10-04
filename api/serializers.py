@@ -5,22 +5,9 @@ from rest_framework import pagination
 from phonebook.models import Person
 
 class PersonSerializer(serializers.ModelSerializer):
-	sex = serializers.SerializerMethodField()
-
 	class Meta:
 		model = Person
 		fields = ('pk', 'name', 'email', 'photo', 'sex', 'birthdate', 'phone')
-
-	def get_sex(self,obj):
-		return obj.get_sex_display()
-
-# class PaginatedPersonSerializer(pagination.PaginationSerializer):
-#     """
-#     Serializes page objects of user querysets.
-#     """
-#     class Meta:
-#         object_serializer_class = PersonSerializer
-
 
 class PaginatedPersonSerializer(serializers.ModelSerializer):
 	def __init__(self, persons, request, num):
