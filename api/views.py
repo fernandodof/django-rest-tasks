@@ -9,7 +9,7 @@ from rest_framework.pagination import PageNumberPagination
 from phonebook.models import Person
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from api.serializers import PersonSerializer, PaginatedPersonSerializer 
-
+from django_gravatar.helpers import get_gravatar_url
 
 # @api_view(['GET', 'POST'])
 # def person_list(request):
@@ -100,7 +100,7 @@ def person(request, pk=None, search=None, order=None):
         """
         search = request.query_params.get('search')
         order = request.query_params.get('order') 
-        print order
+
         if (search==None):
             search = '';
 
@@ -126,11 +126,10 @@ def person(request, pk=None, search=None, order=None):
     elif request.method == 'POST':
         serializer = PersonSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            serializer.save(photo = get_gravatar_url(serializer.data['email'], size=150))
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
-            return Response(
-                serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     try:
         person = Person.objects.get(pk=pk)

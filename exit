@@ -1,0 +1,65 @@
+[33mcommit 536e673af3add140a561222b59b3461e47237cef[m
+Author: Fernando <fernandodof@gmail.com>
+Date:   Mon Oct 5 23:00:06 2015 -0300
+
+    database url
+
+[33mcommit fee958ee3e6effd6969e255b2e5df5d3163d782e[m
+Author: Fernando <fernandodof@gmail.com>
+Date:   Mon Oct 5 22:51:17 2015 -0300
+
+    database url
+
+[33mcommit e471b372cca2b569e58476e64dc2dab497b980c5[m
+Author: Fernando <fernandodof@gmail.com>
+Date:   Mon Oct 5 22:48:05 2015 -0300
+
+    database url
+
+[33mcommit 34bfa92e432f51dc0a983b5e2f89a27e5a0e659d[m
+Author: Fernando <fernandodof@gmail.com>
+Date:   Mon Oct 5 22:43:44 2015 -0300
+
+    database url
+
+[33mcommit b6a83ce37b49f7cacb44a1676c8bb475f3729042[m
+Author: Fernando <fernandodof@gmail.com>
+Date:   Mon Oct 5 22:41:55 2015 -0300
+
+    database url
+
+[33mcommit 820db58eef556763b7c7254d0efdf705644c72ed[m
+Author: Fernando <fernandodof@gmail.com>
+Date:   Mon Oct 5 22:32:55 2015 -0300
+
+    changing to heroku
+
+[33mcommit dfbb48d5d90c818d0403b4caef7a93a909641b0f[m
+Author: Fernando <fernandodof@gmail.com>
+Date:   Sun Oct 4 20:10:25 2015 -0300
+
+    Changing api to have only one endpoint
+
+[33mcommit d4a6f7aa1be78768071deb6dbef1d4fdf2f19df1[m
+Author: fernandodof <fernandodof@gmail.com>
+Date:   Thu Oct 1 20:36:58 2015 -0300
+
+    making sever side search and ordering
+
+[33mcommit 9bc6789d3b6cd8d79c406944f69ae7f0f9a33746[m
+Author: fernandodof <fernandodof@gmail.com>
+Date:   Wed Sep 30 16:06:24 2015 -0300
+
+    seting up pagination
+
+[33mcommit e996fa03b52bfcf944ce195775c13495ed1324d5[m
+Author: Fernando <fernandodof@gmail.com>
+Date:   Wed Sep 23 20:43:35 2015 -0300
+
+    updating to phone book
+
+[33mcommit a97a7aea0d8c3a590e936d102a7886824f629746[m
+Author: Fernando <fernandodof@gmail.com>
+Date:   Tue Sep 22 21:19:11 2015 -0300
+
+    django tasks back end for angualr front end
